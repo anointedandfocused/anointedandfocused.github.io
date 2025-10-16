@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anointed and Focused</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root{
+      --bg:#000;
+      --panel:#000;
+      --muted:#a9a9ad;
+      --gold:#c9a94b;
+      --radius:14px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;scroll-behavior:smooth}
+    body{
+      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
+      background: var(--bg);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding-bottom:80px;
+    }
+    .container{max-width:var(--max);margin:0 auto;padding:32px}
+
+    /* Header */
+    header{
+      display:flex;align-items:center;justify-content:space-between;padding:18px 0;
+      position:sticky;top:0;background:var(--panel);z-index:1000;
+      border-bottom:1px solid rgba(255,255,255,0.03)
+    }
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#f3d89b);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,0.6);font-family:Cinzel,serif;color:#0b0b0d;font-weight:700}
+    .logo-text{font-family:Cinzel,serif;font-size:20px;letter-spacing:1px}
+
+    /* Hero */
+    .hero{
+      display:flex;flex-direction:column;align-items:center;text-align:center;padding:80px 20px;
+    }
+    .hero h1{font-family:Cinzel,serif;font-size:48px;line-height:1.1;margin-bottom:16px}
+    .hero p.lead{color:var(--muted);font-size:20px;max-width:700px;margin-bottom:24px}
+    .hero .features{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+    .pill{padding:6px 12px;background:rgba(255,255,255,0.03);border-radius:999px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+
+    /* Sections */
+    section{padding:40px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+    h2{font-family:Cinzel,serif;margin-bottom:12px;font-size:28px}
+    h2.underline{position:relative;padding-bottom:8px}
+    h2.underline::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:60px;background:linear-gradient(90deg,var(--gold),#f3d89b);border-radius:4px}
+    p, li{color:#fff;margin-top:6px;line-height:1.4;font-size:16px}
+    li{margin-left:18px}
+    .muted{color:var(--muted)}
+
+    /* Card styling */
+    .card{background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);margin-top:12px}
+
+    /* Footer */
+    footer{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03)}
+    .footer-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    .footer-grid a{color:var(--muted);text-decoration:none;font-size:20px;transition:color .2s}
+    .footer-grid a:hover{color:var(--gold)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-mark" aria-hidden><span class="crest">A&F</span></div>
+        <div>
+          <div class="logo-text">Anointed and Focused</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Biblical wisdom & practical hustle</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>FAITH. GRIND. GROWTH. OVERFLOW. <br> IN THAT ORDER</h1>
+      <p class="lead">We build spiritual, mental, physical, and financial excellence with purpose, discipline, and divine alignment. Also, probably cracking a smile a little. Sorry not sorry.</p>
+      <div class="features">
+        <div class="pill"><i class="fas fa-cross"></i> Faith First</div>
+        <div class="pill"><i class="fas fa-dumbbell"></i> Discipline & Grind</div>
+        <div class="pill"><i class="fas fa-seedling"></i> Growth & Character</div>
+        <div class="pill"><i class="fas fa-hand-holding-heart"></i> Overflow & Impact</div>
+      </div>
+    </section>
+
+    <!-- Core Belief -->
+    <section id="core-belief">
+      <h2 class="underline"><i class="fas fa-burn"></i> Our Core Belief</h2>
+      <p>We don't just build wealth, we build <strong>wholeness</strong>. And maybe a tiny bit of chaos for fun.</p>
+      <p>We don't just stack bank accounts, we stack <em>character</em>. Seriously, it's more fun.</p>
+      <p>We don't just chase success, we chase <em>becoming</em>. Like a caterpillar, but with less crawling.</p>
+      <p>Because what good is overflow if we're still empty inside? Hint: nada.</p>
+      <p>God calls us to grow spiritually, mentally, physically, and financially—basically like leveling up in a game where the prize is eternal.</p>
+      <p>Faith without works? Dead. Flat. Kaput.</p>
+      <p>Faith without growth? Stuck in the mud. Gross.</p>
+      <p>Faith without obedience? Waiting on a miracle that's been waiting on <em>us</em>. Cue dramatic music.</p>
+    </section>
+
+    <!-- What We Believe -->
+    <section id="beliefs">
+      <h2 class="underline"><i class="fas fa-book-open"></i> What We Believe</h2>
+      <ul class="card">
+        <li><strong>Faith First, Work Second, Both Always.</strong> <br><span class="muted">James 2:17: “Faith without works is dead.” We pray like it depends on God, then grind like Garfield chasing Lasagna.</span></li>
+        <li><strong>Self-Mastery Is Kingdom Business.</strong> <br>We can't lead others until we've learned to lead ourselves. Discipline, healing, knowledge, emotional maturity—all the fun stuff that makes us slightly less chaotic.</li>
+        <li><strong>Wealth Is a Tool, Not a Trophy.</strong> <br>Money doesn't make us whole, it just magnifies the awesome (or horrible) inside. Use it to bless, not flex.</li>
+        <li><strong>Obedience Over Opportunity.</strong> <br>We don't chase every shiny trend. We chase purpose. Like Jonah finally going to Nineveh. Same energy.</li>
+        <li><strong>Overflow Has a Purpose.</strong> <br>We're not just here to live good, we're here to <em>do</em> good. And maybe throw in some witty banter for flavor.</li>
+        <li><strong>Growth Is a Form of Worship.</strong> <br>Every time we choose discipline over distraction, peace over panic, and progress over comfort—boom, worship. Glory to the big guy upstairs.</li>
+        <li><strong>We Give Back, Not Give Up.</strong> <br>We don't hoard blessings. We multiply them, like bunnies on steroids.</li>
+      </ul>
+    </section>
+
+    <!-- What We Don't Teach -->
+    <section id="dont-teach">
+      <h2 class="underline"><i class="fas fa-ban"></i> What We Don't Teach</h2>
+      <ul class="card">
+        <li>We don't chase hype, we chase healing. Sorry, not sorry.</li>
+        <li>We don't preach "manifest it and chill." Faith requires elbow grease.</li>
+        <li>Holiness isnt hustle. Wealth isnt worth. Just saying.</li>
+        <li>No shortcuts here. Transformation takes time, truth, and lots of coffee.</li>
+        <li>No manipulation. We educate. Prophets optional.</li>
+      </ul>
+    </section>
+
+    <!-- What We Stand For -->
+    <section id="stand-for">
+      <h2 class="underline"><i class="fas fa-lightbulb"></i> What We Stand For</h2>
+      <ul class="card">
+        <li><i class="fas fa-comment-dots"></i> <strong>Truth:</strong> Real talk over religious clichés. Mic drop.</li>
+        <li><i class="fas fa-dumbbell"></i> <strong>Growth:</strong> Becoming better every day, in mind, body, spirit, and grind. Also, maybe a little sarcasm.</li>
+        <li><i class="fas fa-coins"></i> <strong>Stewardship:</strong> We manage what we have like we're already blessed with more. Fancy, right?</li>
+        <li><i class="fas fa-pray"></i> <strong>Faith:</strong> Every move guided by prayer, not panic. Amen, baby.</li>
+        <li><i class="fas fa-users"></i> <strong>Community:</strong> Iron sharpens iron, not egos. Or faces. That's dangerous.</li>
+      </ul>
+    </section>
+
+    <!-- Creed -->
+    <section id="creed">
+      <h2 class="underline"><i class="fas fa-brain"></i> Our Creed</h2>
+      <blockquote class="muted card" style="margin-top:4px">
+        Not hustling for attention.<br><br>
+        Growing for assignment.<br><br>
+        Healing is holy, discipline is devotion,<br><br>
+        Overflow is meant to serve. And maybe crack a joke here and there.
+      </blockquote>
+    </section>
+
+    <!-- Mission -->
+    <section id="mission">
+      <h2 class="underline"><i class="fas fa-dove"></i> Our Mission</h2>
+      <p>To raise a generation that walks in <strong>faith, discipline, and excellence</strong>, mastering self, stewardship, and purpose. Like superheroes, but with less spandex.</p>
+      <p>We're here to break cycles of lack, fear, and mediocrity, and prove that <strong>you can love Jesus, live well, and level up with integrity</strong>. Boom Baby.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-grid">
+        <div style="font-size:13px;color:var(--muted)">&copy; Anointed and Focused 2025</div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a href="https://x.com/anointedfocused" title="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/anointedandfocused/" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AnointedAndFocused" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.tiktok.com/@anointedandfocused" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
