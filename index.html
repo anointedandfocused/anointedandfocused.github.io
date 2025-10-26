@@ -53,96 +53,131 @@
       padding: 32px
     }
 
-/* Navbar Styles */
-.navbar {
-  background: rgba(0, 0, 0, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  backdrop-filter: blur(6px);
-}
+    /* Navbar Styles */
+    .navbar {
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
 
-.nav-container {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 14px 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
+    .nav-container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
 
-.nav-links a {
-  color: var(--gold);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 8px 18px;
-  border: 1px solid var(--gold);
-  border-radius: 999px;
-  transition: all 0.25s ease;
-  font-size: 15px;
-}
+    .nav-links a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 18px;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      transition: all 0.25s ease;
+      font-size: 15px;
+    }
 
-.nav-links a:hover {
-  background: var(--gold);
-  color: #000;
-  box-shadow: 0 0 10px rgba(201, 169, 75, 0.4);
-}
+    .nav-links a:hover {
+      background: var(--gold);
+      color: #000;
+      box-shadow: 0 0 10px rgba(201, 169, 75, 0.4);
+    }
 
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--gold);
-  font-size: 22px;
-  cursor: pointer;
-  position: absolute;
-  right: 24px;
-  transition: color 0.2s;
-}
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 42px;
+      height: 42px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      right: 24px;
+      z-index: 1100;
+    }
 
-.nav-toggle:hover {
-  color: #fff;
-}
+    .nav-toggle .bar {
+      width: 28px;
+      height: 3px;
+      background-color: var(--gold);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
 
-/* Responsive Navbar */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 16px;
-    background: rgba(0, 0, 0, 0.95);
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    padding: 20px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    align-items: center;
-  }
+    /* Hover glow */
+    .nav-toggle:hover .bar {
+      background-color: #fff;
+    }
 
-  .nav-links.active {
-    display: flex;
-  }
+    /* Transform into X when active */
+    .nav-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
 
-  .nav-toggle {
-    display: block;
-  }
-}
+    .nav-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
 
-/* Prevent overlap with fixed navbar */
-body {
-  padding-top: 70px;
-}
+    .nav-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: rgba(0, 0, 0, 0.95);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.4s ease;
+      }
+
+      .nav-links.active {
+        max-height: 300px;
+        /* enough to show all items */
+        opacity: 1;
+        transform: translateY(0);
+        padding: 20px 0;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+    }
+
+
+    /* Prevent overlap with fixed navbar */
+    body {
+      padding-top: 70px;
+    }
 
 
 
@@ -304,26 +339,28 @@ body {
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E2CKZTNS5B"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   gtag('config', 'G-E2CKZTNS5B');
 </script>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="nav-container">
-    <button class="nav-toggle" aria-label="Toggle navigation">
-      <i class="fas fa-bars"></i>
-    </button>
-    <ul class="nav-links">
-      <!-- <li><a href="#blog">Blog</a></li> -->
-      <li><a href="https://anointedandfocused.printful.me/">Merch</a></li>
-      <!-- <li><a href="#donate">Donate</a></li> -->
-    </ul>
-  </div>
-</nav>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links">
+        <!-- <li><a href="#blog">Blog</a></li> -->
+        <li><a href="https://anointedandfocused.printful.me/">Merch</a></li>
+        <!-- <li><a href="#donate">Donate</a></li> -->
+      </ul>
+    </div>
+  </nav>
 
   <div class="container">
     <header class="header-image">
@@ -444,14 +481,17 @@ body {
       </div>
     </footer>
   </div>
-<script>
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
+ 
+ <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-</script>
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+  </script>
+
 
 </body>
 
