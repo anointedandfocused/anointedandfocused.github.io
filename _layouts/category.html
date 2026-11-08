@@ -1,0 +1,26 @@
+---
+layout: default
+---
+{%- assign posts = site.categories[page.title] -%}
+<div class="wrap">
+  <header class="archive-header">
+    <p class="archive-kicker"><a href="{{ '/categories/' | relative_url }}">All categories</a></p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {%- if page.description %}<p class="archive-desc">{{ page.description }}</p>{% endif %}
+  </header>
+
+  {%- if posts.size > 0 -%}
+  <div class="post-grid">
+    {%- for post in posts -%}
+      {% include post-card.html post=post %}
+    {%- endfor -%}
+  </div>
+  {%- else -%}
+  <p class="empty">There are no posts in this category yet. Check back soon, or <a href="{{ '/' | relative_url }}">browse the latest posts</a>.</p>
+  {%- endif -%}
+
+  <section class="topics" aria-labelledby="other-topics">
+    <h2 class="section-title" id="other-topics">Other categories</h2>
+    {% include topic-pills.html current=page.title %}
+  </section>
+</div>

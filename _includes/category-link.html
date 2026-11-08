@@ -1,0 +1,9 @@
+{%- comment -%} Usage: {% include category-link.html category="Biblical Wisdom" %} {%- endcomment -%}
+{%- if include.category -%}
+  {%- assign topic = site.topics | where: "title", include.category | first -%}
+  {%- if topic -%}
+<a class="cat-link" href="{{ topic.url | relative_url }}">{{ include.category | escape }}</a>
+  {%- else -%}
+<span class="cat-link">{{ include.category | escape }}</span>
+  {%- endif -%}
+{%- endif -%}

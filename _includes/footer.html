@@ -1,0 +1,22 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-copy">&copy; {{ 'now' | date: '%Y' }} {{ site.title | escape }}</div>
+      <ul class="footer-links">
+        <li><a href="{{ '/categories/' | relative_url }}">Categories</a></li>
+        <li><a href="{{ '/tags/' | relative_url }}">Tags</a></li>
+        <li><a href="{{ '/search/' | relative_url }}">Search</a></li>
+        <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
+      </ul>
+      <ul class="footer-social">
+        {%- for link in site.social_links -%}
+        <li>
+          <a href="{{ link.url }}" aria-label="{{ link.name }}" rel="noopener">
+            <svg class="icon{% if link.icon == 'facebook' or link.icon == 'tiktok' %} icon-solid{% endif %}" aria-hidden="true"><use href="#icon-{{ link.icon }}"></use></svg>
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</footer>

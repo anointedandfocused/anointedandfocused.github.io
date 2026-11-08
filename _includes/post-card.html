@@ -1,0 +1,30 @@
+{%- comment -%} Usage: {% include post-card.html post=post %}  (add featured=true for the large version) {%- endcomment -%}
+{%- assign p = include.post -%}
+{%- assign cat = p.categories | first -%}
+<article class="post-card{% if p.type == 'video' %} is-video{% endif %}{% if include.featured %} post-card--featured{% endif %}">
+  <a class="card-media" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    {%- if p.image -%}
+    <img src="{% include img-src.html src=p.image %}" alt="" loading="lazy">
+    {%- elsif p.type == 'video' and p.youtube_id -%}
+    <img src="https://i.ytimg.com/vi/{{ p.youtube_id }}/hqdefault.jpg" alt="" loading="lazy">
+    {%- else -%}
+    <span class="media-empty"><svg class="icon" aria-hidden="true"><use href="#icon-cross"></use></svg></span>
+    {%- endif -%}
+    {%- if p.type == 'video' -%}
+    <span class="play-badge"><svg class="icon icon-solid" aria-hidden="true"><use href="#icon-play"></use></svg></span>
+    {%- endif -%}
+  </a>
+  <div class="card-body">
+    <p class="card-meta">
+      {% include category-link.html category=cat %}
+      <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%B %-d, %Y" }}</time>
+      {%- if p.type == 'video' %}<span>Video</span>{% endif -%}
+      {%- if p.sample and site.show_sample_badge %}<span class="sample-badge">Sample</span>{% endif -%}
+    </p>
+    <h3 class="card-title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+    <p class="card-excerpt">{{ p.excerpt | strip_html | strip | truncate: 190 }}</p>
+    {%- if include.featured -%}
+    <p class="card-action"><a class="btn-gold" href="{{ p.url | relative_url }}">{% if p.type == 'video' %}Watch the video{% else %}Read the post{% endif %}</a></p>
+    {%- endif -%}
+  </div>
+</article>

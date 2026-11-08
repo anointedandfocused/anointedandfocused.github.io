@@ -1,0 +1,20 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-name">{{ site.title | escape }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        {%- for item in site.data.navigation -%}
+          {%- assign is_current = false -%}
+          {%- if page.url == item.url -%}
+            {%- assign is_current = true -%}
+          {%- elsif item.match and page.url contains item.match -%}
+            {%- assign is_current = true -%}
+          {%- endif -%}
+        <li><a href="{{ item.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,23 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    {%- if site.banner_image -%}
+    <img class="hero-banner" src="{{ site.banner_image | relative_url }}" alt="{{ site.title | escape }}">
+    {%- endif -%}
+    <h1 class="hero-title" id="hero-title">
+      {%- for word in site.hero.words -%}{{ word }}{% unless forloop.last %}<br>{% endunless %}{%- endfor -%}
+    </h1>
+    <p class="hero-order">{{ site.hero.order }}</p>
+    {%- for line in site.hero.intro -%}
+    <p class="lead">{{ line }}</p>
+    {%- endfor -%}
+    <ul class="pills">
+      {%- for pill in site.hero.pills -%}
+      <li class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-{{ pill.icon }}"></use></svg> {{ pill.label }}</li>
+      {%- endfor -%}
+    </ul>
+    <p class="hero-actions">
+      <a class="btn-gold" href="{{ '/' | relative_url }}">Read the latest posts</a>
+      <a class="btn-ghost" href="{{ '/categories/' | relative_url }}">Browse categories</a>
+    </p>
+  </div>
+</section>

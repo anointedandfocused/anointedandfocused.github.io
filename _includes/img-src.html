@@ -1,0 +1,2 @@
+{%- comment -%} Prints a usable image address for either /local/paths or https://full/urls. {%- endcomment -%}
+{%- if include.src contains '://' -%}{{ include.src }}{%- else -%}{{ include.src | relative_url }}{%- endif -%}

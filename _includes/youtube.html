@@ -1,0 +1,16 @@
+{%- comment -%}
+  Responsive YouTube embed.
+  Usage: {% include youtube.html id="VIDEO_ID" title="Short description" %}
+  Optional: start=90 (begin at 90 seconds)
+{%- endcomment -%}
+{%- assign vid = include.id | strip -%}
+{%- if vid != "" -%}
+<div class="video-embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ vid }}?rel=0{% if include.start and include.start != 0 %}&amp;start={{ include.start }}{% endif %}"
+          title="{{ include.title | default: 'YouTube video' | escape }}"
+          loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+</div>
+{%- endif -%}

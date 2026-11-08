@@ -1,0 +1,10 @@
+{%- comment -%} Row of category links with post counts. Optional: current="Category Title" {%- endcomment -%}
+{%- assign topics = site.topics | sort: "order" -%}
+<ul class="pills pills--links">
+  {%- for t in topics -%}
+    {%- unless t.title == include.current -%}
+    {%- assign n = site.categories[t.title].size | default: 0 -%}
+  <li><a class="pill" href="{{ t.url | relative_url }}">{{ t.title | escape }} <span class="pill-count">{{ n }}</span></a></li>
+    {%- endunless -%}
+  {%- endfor -%}
+</ul>

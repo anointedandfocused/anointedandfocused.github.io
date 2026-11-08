@@ -1,0 +1,60 @@
+---
+layout: default
+---
+{%- assign cat = page.categories | first -%}
+{%- assign is_video = false -%}
+{%- if page.type == 'video' -%}{%- assign is_video = true -%}{%- endif -%}
+<article class="wrap wrap--read post post--{% if is_video %}video{% else %}article{% endif %}">
+
+  <header class="post-header">
+    <p class="post-kicker">{% include category-link.html category=cat %}</p>
+    <h1 class="post-title">{{ page.title }}</h1>
+    {%- if is_video and page.excerpt -%}
+    <p class="post-lead">{{ page.excerpt | strip_html | strip }}</p>
+    {%- endif -%}
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {%- if is_video %}<span>Video</span>{% else %}<span>{{ page.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>{% endif -%}
+      {%- if page.sample and site.show_sample_badge %}<span class="sample-badge">Sample</span>{% endif -%}
+    </p>
+  </header>
+
+  {%- if is_video -%}
+    {% include youtube.html id=page.youtube_id start=page.video_start title=page.title %}
+  {%- elsif page.image -%}
+    <figure class="post-figure">
+      <img src="{% include img-src.html src=page.image %}" alt="{{ page.image_alt | default: '' | escape }}">
+    </figure>
+  {%- endif -%}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  {%- if page.tags.size > 0 -%}
+  <ul class="tag-list" aria-label="Tags">
+    {%- for tag in page.tags -%}
+    <li><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a></li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+
+  {% include share.html %}
+
+  <nav class="post-nav" aria-label="More posts">
+    {%- if page.previous -%}
+    <a class="post-nav-link post-nav-link--prev" href="{{ page.previous.url | relative_url }}" rel="prev">
+      <span class="post-nav-label">Older</span>
+      <span class="post-nav-title">{{ page.previous.title }}</span>
+    </a>
+    {%- else -%}<span></span>{%- endif -%}
+    {%- if page.next -%}
+    <a class="post-nav-link post-nav-link--next" href="{{ page.next.url | relative_url }}" rel="next">
+      <span class="post-nav-label">Newer</span>
+      <span class="post-nav-title">{{ page.next.title }}</span>
+    </a>
+    {%- endif -%}
+  </nav>
+</article>
+
+{% include related-posts.html %}

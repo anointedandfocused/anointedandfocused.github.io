@@ -1,0 +1,11 @@
+# Main menu. Add, remove, or reorder items here.
+# `match` keeps the menu item highlighted on any page whose address contains that text.
+- title: Home
+  url: /
+- title: Categories
+  url: /categories/
+  match: /categor
+- title: About
+  url: /about/
+- title: Search
+  url: /search/

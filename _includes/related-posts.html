@@ -1,0 +1,47 @@
+{%- comment -%}
+  Related posts: +2 points for the same category, +1 for each shared tag.
+  Highest score wins, newest first on ties. Falls back to the latest posts.
+{%- endcomment -%}
+{%- assign my_cat = page.categories | first -%}
+{%- assign scored = "" | split: "" -%}
+{%- for p in site.posts -%}
+  {%- if p.url != page.url -%}
+    {%- assign score = 0 -%}
+    {%- assign p_cat = p.categories | first -%}
+    {%- if my_cat and p_cat == my_cat -%}{%- assign score = score | plus: 2 -%}{%- endif -%}
+    {%- for t in p.tags -%}
+      {%- if page.tags contains t -%}{%- assign score = score | plus: 1 -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if score > 0 -%}
+      {%- capture entry -%}{% if score < 10 %}0{% endif %}{{ score }}-{{ p.date | date: '%s' }}|{{ p.url }}{%- endcapture -%}
+      {%- assign scored = scored | push: entry -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign scored = scored | sort | reverse -%}
+
+{%- assign related = "" | split: "" -%}
+{%- for entry in scored limit: 3 -%}
+  {%- assign url = entry | split: '|' | last -%}
+  {%- assign rp = site.posts | where: "url", url | first -%}
+  {%- assign related = related | push: rp -%}
+{%- endfor -%}
+
+{%- assign heading = "Keep reading" -%}
+{%- if related.size == 0 -%}
+  {%- assign heading = "More from the blog" -%}
+  {%- for p in site.posts limit: 4 -%}
+    {%- if p.url != page.url and related.size < 3 -%}{%- assign related = related | push: p -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if related.size > 0 -%}
+<section class="wrap related" aria-labelledby="related-heading">
+  <h2 class="section-title" id="related-heading">{{ heading }}</h2>
+  <div class="post-grid">
+    {%- for p in related -%}
+      {% include post-card.html post=p %}
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}

@@ -1,0 +1,95 @@
+# =============================================================================
+#  SITE SETTINGS  -  the one file for site-wide changes
+#  (After editing _config.yml you must restart `jekyll serve` locally.
+#   On GitHub Pages it applies automatically after you commit.)
+# =============================================================================
+
+title: "Anointed & Focused"
+tagline: "Faith. Discipline. Growth. Overflow."
+description: "A faith-first blog about disciplined living, purposeful growth, and generous overflow. Real transformation starts with Christ."
+author: "Anointed & Focused"
+lang: en
+timezone: America/Detroit
+
+# Your live address. Use https once HTTPS is enforced in GitHub Pages settings.
+url: "https://anointedandfocused.com"
+baseurl: ""
+
+# Google Analytics (same ID as the current site). Remove the line to turn it off.
+google_analytics: G-E2CKZTNS5B
+
+# X (Twitter) handle used in social sharing metadata.
+twitter:
+  username: anointedfocused
+
+# Social icons in the footer. Supported icons: x, facebook, instagram, youtube, tiktok
+social_links:
+  - { name: "X",         icon: x,         url: "https://x.com/anointedfocused" }
+  - { name: "Facebook",  icon: facebook,  url: "https://www.facebook.com/anointedandfocused" }
+  - { name: "Instagram", icon: instagram, url: "https://www.instagram.com/anointedandfocused/" }
+  - { name: "YouTube",   icon: youtube,   url: "https://www.youtube.com/@AnointedAndFocused" }
+  - { name: "TikTok",    icon: tiktok,    url: "https://www.tiktok.com/@anointedandfocused" }
+
+# Where the "Join me" buttons on the About page go.
+community_url: "https://www.facebook.com/anointedandfocused/"
+youtube_url: "https://www.youtube.com/@AnointedAndFocused"
+
+# Banner image shown at the top of the About page. Keep banner.png in the repository root.
+# Delete this line to hide it.
+banner_image: /banner.png
+
+# Welcome section at the top of the About page.
+hero:
+  words: ["Faith.", "Discipline.", "Growth.", "Overflow."]
+  order: "In That Order."
+  intro:
+    - "I'm glad you're here. God never intended for my faith to stay inside church walls. It should shape how I live, work, lead, give, and serve every day."
+    - "This is where I write about following Christ into every area of life: spiritual growth, disciplined living, wise stewardship, and purposeful work."
+    - "I'm not chasing success for its own sake. I'm pursuing the life God created me to live."
+  pills:
+    - { icon: cross,    label: "Faith First" }
+    - { icon: dumbbell, label: "Live with Discipline" }
+    - { icon: seedling, label: "Grow with Purpose" }
+    - { icon: heart,    label: "Bless Through Overflow" }
+
+# Shows a small "Sample" tag on posts marked `sample: true`.
+# Set to false (or delete the sample posts) when you go live with real content.
+show_sample_badge: true
+
+# -----------------------------------------------------------------------------
+#  Technical settings (you normally never need to change anything below)
+# -----------------------------------------------------------------------------
+markdown: kramdown
+permalink: /posts/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+paginate: 7
+paginate_path: "/page:num/"
+
+collections:
+  topics:               # Categories live in the _topics/ folder
+    output: true
+    permalink: /category/:name/
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values:
+      layout: post
+      type: article
+      sample: false
+  - scope: { path: "", type: "topics" }
+    values:
+      layout: category
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - .jekyll-cache
