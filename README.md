@@ -264,7 +264,7 @@ If you would rather keep a sample as a reference, set `sample: false` in its fro
 | **SEO and social sharing metadata** (Open Graph, X card, canonical links) | Built into every page |
 | **Share links** (Facebook, X, email) | Under every post |
 | **Accessibility** | Skip link, visible keyboard focus, readable type sizes, reduced-motion support, labeled navigation |
-| **Mobile friendly** | Layouts adapt to phones and tablets; videos stay 16:9 |
+| **Mobile friendly** | Menu collapses into a button on phones, full-width buttons, large tap targets, notch-safe margins, and videos that stay 16:9 |
 
 Plugins used (all supported by GitHub Pages): `jekyll-feed`, `jekyll-paginate`, `jekyll-seo-tag`, `jekyll-sitemap`. There is no database, external CMS, or build tool to maintain.
 
