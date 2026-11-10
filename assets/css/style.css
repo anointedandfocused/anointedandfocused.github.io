@@ -14,6 +14,7 @@
   --gold: #c9a94b;
   --gold-light: #f3d89b;
   --gold-line: rgba(201, 169, 75, 0.35);
+  --red-letter: #f0615a;   /* the words of Jesus (red-letter text) */
 
   --font-display: Cinzel, "Trajan Pro", Georgia, serif;
   --font-body: Montserrat, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
@@ -393,6 +394,107 @@ a.cat-link:hover { color: var(--gold-light); text-decoration: underline; }
 .footer-social a { font-size: 20px; color: var(--muted); text-decoration: none; display: inline-flex; padding: 4px; }
 .site-footer a:hover { color: var(--gold); }
 
+/* ---------- Red-letter text: the words of Jesus ----------
+   Inline:  <span class="jesus">"Follow me."</span>
+   Whole block (add on the line after it):  {: .jesus}                         */
+.jesus { color: var(--red-letter); font-weight: 500; }
+.post-content blockquote.jesus, .page-content blockquote.jesus,
+.post-content blockquote.jesus p, .page-content blockquote.jesus p,
+.post-content p.jesus, .post-content li.jesus { color: var(--red-letter); }
+.post-content .jesus strong { color: inherit; }
+
+/* ---------- Devotionals ---------- */
+.devo-scripture {
+  display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; padding: 6px 16px;
+  border: 1px solid var(--gold-line); border-radius: 999px; background: rgba(201, 169, 75, 0.07);
+  font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+}
+.sermon-link {
+  display: flex; align-items: center; gap: 18px 20px; flex-wrap: wrap; margin: 0 0 36px; padding: 18px 22px;
+  background: var(--surface); border: 1px solid var(--gold-line); border-radius: var(--radius);
+}
+.sermon-icon {
+  flex: 0 0 auto; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-size: 20px;
+}
+.sermon-icon .icon { margin-left: 2px; }
+.sermon-text { flex: 1 1 220px; min-width: 0; line-height: 1.5; }
+.sermon-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.sermon-title { display: block; margin-top: 2px; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #fff; overflow-wrap: break-word; }
+.sermon-by { display: block; font-size: 14px; color: var(--muted); }
+.sermon-link .btn-ghost { padding: 10px 24px; font-size: 13px; }
+
+.devotional { counter-reset: devo; }
+.devotional .devo-section { margin-top: 56px; }
+.devotional .devo-section:first-child { margin-top: 8px; }
+.devotional .devo-section hr { display: none; }
+.devotional .devo-section > h2 {
+  display: flex; align-items: center; gap: 16px; margin: 0 0 22px;
+  font-size: 15px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+}
+.devotional .devo-section > h2::after { content: ""; flex: 1; height: 1px; background: var(--gold-line); }
+.devotional .devo-section > * + * { margin-top: 1.25em; }
+.devotional .devo-section > h2 + * { margin-top: 0; }
+
+/* Main message summary: a framed lead-in */
+.devo-main-message-summary {
+  padding: 28px 32px 30px; background: rgba(201, 169, 75, 0.07);
+  border: 1px solid var(--gold-line); border-left: 4px solid var(--gold); border-radius: var(--radius);
+}
+.devo-main-message-summary p { font-size: 18px; color: var(--text-soft); }
+.devotional .devo-main-message-summary { margin-top: 8px; }
+
+/* The reading itself: slightly larger, easy on the eyes */
+.devo-the-devotional p { font-size: 18px; line-height: 1.95; }
+
+/* Cross-references: tidy reference list */
+.devo-additional-cross-references ul { list-style: none; padding: 0; border-bottom: 1px solid var(--line); }
+.devo-additional-cross-references li { padding: 14px 0; border-top: 1px solid var(--line); margin: 0; font-size: 16px; line-height: 1.7; }
+.devo-additional-cross-references li strong { color: var(--gold-light); }
+
+/* Biblical examples: one card per example */
+.devo-biblical-examples p {
+  padding: 22px 26px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); font-size: 16.5px;
+}
+.devo-biblical-examples p strong {
+  display: block; margin-bottom: 6px; font-family: var(--font-display); font-size: 18px; color: var(--gold); line-height: 1.4;
+}
+
+/* Practical applications and reflection questions: numbered cards */
+.devo-practical-applications ol, .devo-reflection-questions ol { list-style: none; padding: 0; counter-reset: devo; }
+.devo-practical-applications li, .devo-reflection-questions li {
+  position: relative; counter-increment: devo; margin: 0 0 12px; padding: 18px 22px 18px 72px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); line-height: 1.75;
+}
+.devo-practical-applications li::before, .devo-reflection-questions li::before {
+  content: counter(devo); position: absolute; left: 22px; top: 18px; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center; border: 1px solid var(--gold); border-radius: 50%;
+  font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--gold); line-height: 1;
+}
+.devo-practical-applications li strong { color: var(--gold-light); }
+.devo-reflection-questions li { font-style: italic; }
+
+/* Closing prayer */
+.devo-closing-prayer {
+  padding: 36px 36px 40px; border: 1px solid var(--line); border-top: 3px solid var(--gold);
+  border-radius: var(--radius); background: var(--surface);
+}
+.devo-closing-prayer > h2 { justify-content: center; }
+.devo-closing-prayer > h2::after { display: none; }
+.devo-closing-prayer p { font-size: 19px; font-style: italic; line-height: 2; color: #fff; }
+
+/* Key takeaway: the line to remember */
+.devo-key-takeaway {
+  text-align: center; padding: 44px 32px; border: 1px solid var(--gold-line); border-radius: var(--radius);
+  background: radial-gradient(circle at 50% 0%, rgba(201, 169, 75, 0.18), transparent 70%);
+}
+.devo-key-takeaway > h2 { justify-content: center; }
+.devo-key-takeaway > h2::after { display: none; }
+.devo-key-takeaway p, .devo-key-takeaway strong {
+  font-family: var(--font-display); font-size: clamp(21px, 3.6vw, 28px); font-weight: 700; line-height: 1.5; color: var(--gold-light);
+}
+
 /* ---------- Mobile menu button (hidden on desktop) ---------- */
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
@@ -459,6 +561,20 @@ a.cat-link:hover { color: var(--gold-light); text-decoration: underline; }
   .post-nav-link { max-width: 100%; flex-basis: 100%; }
   .post-nav-link--next { text-align: left; margin-left: 0; }
   .related { padding-top: 48px; }
+
+  /* Devotionals */
+  .devotional .devo-section { margin-top: 44px; }
+  .devo-main-message-summary { padding: 22px 20px 24px; }
+  .devo-the-devotional p, .devo-main-message-summary p { font-size: 17px; }
+  .devo-practical-applications li, .devo-reflection-questions li { padding: 16px 16px 16px 58px; }
+  .devo-practical-applications li::before, .devo-reflection-questions li::before { left: 14px; top: 16px; width: 30px; height: 30px; font-size: 14px; }
+  .devo-biblical-examples p { padding: 18px 18px; }
+  .devo-closing-prayer { padding: 28px 20px 30px; }
+  .devo-closing-prayer p { font-size: 17.5px; }
+  .devo-key-takeaway { padding: 32px 20px; }
+  .sermon-link { padding: 16px; }
+  .sermon-link .btn-ghost { flex: 1 1 100%; }
+  .devotional .devo-section > h2 { letter-spacing: 2px; font-size: 14px; }
 
   /* Buttons go full width and stack */
   .hero-actions, .join-actions { flex-direction: column; align-items: stretch; }

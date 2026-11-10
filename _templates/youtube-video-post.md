@@ -36,6 +36,7 @@ date: 2026-11-12
 #   Discipline & Personal Development
 #   Purpose & Calling
 #   Christian Living
+#   Devotionals
 category: "Purpose & Calling"
 
 # Optional. Lowercase words in square brackets, separated by commas. Use [] for none.

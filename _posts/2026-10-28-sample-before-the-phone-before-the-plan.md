@@ -7,7 +7,7 @@ tags: [prayer, morning routine, habits]
 excerpt: "Most mornings I used to reach for my phone before I reached for God. Here is what changes when the order is reversed, and why it matters more than any productivity trick."
 image: /assets/images/sample/featured-sample.svg
 image_alt: "A gold cross glowing against a dark background"
-featured: true
+featured: false
 sample: true
 ---
 

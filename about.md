@@ -55,12 +55,13 @@ God's blessings were never meant to end with me. As I grow, I'm called to encour
 
 <div class="card" markdown="1">
 
-Two kinds of posts show up on this site:
+Three kinds of posts show up on this site:
 
 - **Written posts.** Articles on faith, Scripture, discipline, money, and purpose, grounded in the Word of God.
+- **Devotionals.** Scripture-centered devotionals with reflection questions, practical steps, and prayer.
 - **Video posts.** Videos from my [YouTube channel]({{ site.youtube_url }}), with written reflections and the Scripture behind them.
 
-You can browse everything by [category]({{ '/categories/' | relative_url }}): Faith & Spiritual Growth, Biblical Wisdom, Financial Stewardship, Discipline & Personal Development, Purpose & Calling, and Christian Living. Or use [search]({{ '/search/' | relative_url }}) to find a topic.
+You can browse everything by [category]({{ '/categories/' | relative_url }}): Faith & Spiritual Growth, Biblical Wisdom, Financial Stewardship, Discipline & Personal Development, Purpose & Calling, Christian Living, and Devotionals. Or use [search]({{ '/search/' | relative_url }}) to find a topic.
 
 </div>
 

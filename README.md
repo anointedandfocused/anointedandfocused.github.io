@@ -58,7 +58,15 @@ A Christ-centered personal blog built with [Jekyll](https://jekyllrb.com/) and h
 5. Write your commentary, Scripture, and closing thoughts below the second `---`.
 6. Commit. The video player is added automatically and resizes for phones.
 
-> The `type:` line is what tells the site how to display the post. Keep `type: article` for written posts and `type: video` for video posts.
+### A devotional
+
+1. Copy **`_templates/devotional-post.md`** and create a new file in `_posts/` named `YYYY-MM-DD-your-devotional-title.md`.
+2. Fill in the front matter. Put the main passage in `scripture:` (for example `"Matthew 18:6-9"`); it appears under the title. Paste the link to the original sermon video into `sermon_url:` (and optionally `sermon_title:` and `sermon_by:`) to show a "Based on a sermon" box with a **Watch the sermon** button. Delete those lines if there is no sermon link.
+3. Write each section under its heading: **Main Message Summary, The Devotional, Additional Cross-References, Biblical Examples, Practical Applications, Reflection Questions, Closing Prayer, Key Takeaway.** Keep the heading names and use `##` (two hashes). Each one gets its own design: a framed summary, cross-reference list, example cards, numbered application and question cards, a prayer card, and a highlighted takeaway. Delete any section you don't need.
+4. Wrap the words of Jesus in red (see [Red letters](#4-writing-tips)).
+5. Commit. It publishes in the **Devotionals** category automatically.
+
+> The `type:` line is what tells the site how to display the post: `article` for written posts, `video` for YouTube posts, and `devotional` for devotionals.
 
 ---
 
@@ -82,18 +90,21 @@ The block between the two `---` lines at the top of each post is called **front 
 | Field | Required? | What it does | Example |
 |---|---|---|---|
 | `title` | Yes | The headline. Keep the quotes. | `"Trusting God with the Plan"` |
-| `type` | Yes | `article` for written posts, `video` for YouTube posts. | `article` |
+| `type` | Yes | `article` for written posts, `video` for YouTube posts, `devotional` for devotionals. | `article` |
 | `date` | Yes | Publish date, `YYYY-MM-DD`. A future date stays hidden until that day. | `2026-11-10` |
 | `category` | Yes | **One** category. Must match a category title exactly. | `"Biblical Wisdom"` |
 | `tags` | Optional | Lowercase words in square brackets. Use `[]` for none. | `[prayer, habits]` |
 | `excerpt` | Yes | One or two sentences. Shown on previews, in search, and when shared. For video posts it is the video description under the title. | `"A short summary."` |
+| `scripture` | Devotionals (optional) | The main passage, shown under the title. | `"Matthew 18:6-9"` |
+| `sermon_url` | Devotionals (optional) | Link to the original sermon video. Shows a "Based on a sermon" box with a **Watch the sermon** button under the title. | `"https://www.youtube.com/watch?v=AbC123xYz09"` |
+| `sermon_title`, `sermon_by` | Optional, with `sermon_url` | Sermon title and speaker or church, shown in that box. | `"Jesus or Caesar?"`, `"Pastor Name, Church Name"` |
 | `youtube_id` | Video posts | The 11-character video ID. | `"AbC123xYz09"` |
 | `video_start` | Optional | Start the video at this many seconds. | `90` |
 | `image` | Optional | Featured image path. For video posts it overrides the YouTube thumbnail. | `/assets/images/posts/photo.jpg` |
 | `image_alt` | With `image` | Describes the image for screen readers. | `"Sunrise over a field"` |
 | `featured` | Optional | `true` highlights the post at the top of the homepage. | `false` |
 
-**The six categories:** Faith & Spiritual Growth, Biblical Wisdom, Financial Stewardship, Discipline & Personal Development, Purpose & Calling, Christian Living.
+**The seven categories:** Faith & Spiritual Growth, Biblical Wisdom, Financial Stewardship, Discipline & Personal Development, Purpose & Calling, Christian Living, Devotionals.
 
 **Front matter rules that prevent most problems**
 
@@ -121,6 +132,25 @@ Everything below the second `---` is plain Markdown.
 ```
 
 You can also mention a verse in a normal sentence (for example, Philippians 4:13). Add the translation abbreviation after quoted verses.
+
+**Red letters (the words of Jesus).** Wrap only Jesus' words in a red highlight. It works in any post type, inside a sentence, a list, or a Scripture quote:
+
+```markdown
+Jesus said, <span class="jesus">"I am the way, and the truth, and the life."</span> (John 14:6)
+
+> <span class="jesus">"Come to me, all who labor and are heavy laden, and I will give you rest."</span>
+>
+> <cite>Matthew 11:28 (ESV)</cite>
+```
+
+The red is a soft red chosen to stay readable on the black background. To make a whole quote block red, add `{: .jesus}` on the line right after it:
+
+```markdown
+> "Let the little children come to me."
+{: .jesus}
+```
+
+To change the shade, edit `--red-letter` at the top of `assets/css/style.css`.
 
 **Lists.** Start lines with `- ` for bullets or `1. ` for numbers.
 
@@ -245,6 +275,8 @@ The five starter posts are sample content so you can see how everything works. E
 2. Delete the folder `assets/images/sample/` (only the sample posts use it).
 3. Publish your real posts. Nothing else needs to change.
 
+The devotional "Jesus or Caesar?" is real content, not a sample, so it stays. It also shows the devotional design; delete `_posts/2026-11-10-jesus-or-caesar.md` if you don't want it published.
+
 If you would rather keep a sample as a reference, set `sample: false` in its front matter (or set `show_sample_badge: false` in `_config.yml` to hide all the tags). The two video samples use public YouTube demo videos as placeholders; replace them with your own.
 
 ---
@@ -281,6 +313,7 @@ Plugins used (all supported by GitHub Pages): `jekyll-feed`, `jekyll-paginate`, 
 ├── _posts/                   YOUR POSTS GO HERE (written and video)
 ├── _templates/               Copy-and-paste starting points
 │   ├── standard-post.md
+│   ├── devotional-post.md
 │   └── youtube-video-post.md
 ├── _topics/                  One small file per category
 ├── assets/

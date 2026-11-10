@@ -1,0 +1,15 @@
+{%- comment -%}
+  "Based on a sermon" card for devotionals.
+  Usage: {% include sermon-link.html url=page.sermon_url title=page.sermon_title by=page.sermon_by %}
+{%- endcomment -%}
+{%- if include.url -%}
+<aside class="sermon-link" aria-label="Original sermon">
+  <span class="sermon-icon" aria-hidden="true"><svg class="icon icon-solid"><use href="#icon-play"></use></svg></span>
+  <div class="sermon-text">
+    <span class="sermon-label">Based on a sermon</span>
+    {%- if include.title %}<span class="sermon-title">{{ include.title | escape }}</span>{% endif -%}
+    {%- if include.by %}<span class="sermon-by">{{ include.by | escape }}</span>{% endif -%}
+  </div>
+  <a class="btn-ghost" href="{{ include.url | escape }}" target="_blank" rel="noopener">Watch the sermon</a>
+</aside>
+{%- endif -%}

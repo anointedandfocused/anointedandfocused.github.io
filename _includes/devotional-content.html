@@ -1,0 +1,18 @@
+{%- comment -%}
+  Wraps each "## Heading" section of a devotional in its own styled block.
+  The style is chosen from the heading text, e.g. "Closing Prayer" -> .devo-closing-prayer
+  Any heading works; unknown headings just get the standard section style.
+{%- endcomment -%}
+{%- assign parts = content | split: '<h2 ' -%}
+<div class="post-content devotional">
+{%- for part in parts -%}
+  {%- if forloop.first -%}
+    {%- assign intro = part | strip -%}
+    {%- if intro != "" -%}<div class="devo-intro">{{ part }}</div>{%- endif -%}
+  {%- else -%}
+    {%- assign pieces = part | split: 'id="' -%}
+    {%- assign slug = pieces[1] | split: '"' | first -%}
+<section class="devo-section devo-{{ slug }}"><h2 {{ part }}</section>
+  {%- endif -%}
+{%- endfor -%}
+</div>
