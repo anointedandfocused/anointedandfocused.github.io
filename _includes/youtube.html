@@ -5,7 +5,7 @@
 {%- endcomment -%}
 {%- assign vid = include.id | strip -%}
 {%- if vid != "" -%}
-<div class="video-embed">
+<div class="video-embed" data-video-id="{{ vid }}">
   <iframe src="https://www.youtube-nocookie.com/embed/{{ vid }}?rel=0{% if include.start and include.start != 0 %}&amp;start={{ include.start }}{% endif %}"
           title="{{ include.title | default: 'YouTube video' | escape }}"
           loading="lazy"
@@ -13,4 +13,5 @@
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen></iframe>
 </div>
+<p class="video-fallback">Video not loading? <a href="https://www.youtube.com/watch?v={{ vid }}{% if include.start and include.start != 0 %}&amp;t={{ include.start }}s{% endif %}" target="_blank" rel="noopener">Watch it on YouTube</a>.</p>
 {%- endif -%}

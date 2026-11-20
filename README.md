@@ -241,6 +241,7 @@ Run these in the project folder. Then check the **Actions** tab on GitHub.
 | **Red X in Actions / "Page build failed" email** | Usually a typo in front matter. Open the failed run to see the file name. Common causes: missing closing `---`, a title or excerpt with a colon or quote that is not wrapped in quotes, a tab character, or a curly quote `"` pasted from Word. Fix the line and commit again. |
 | **Changes are not visible** | Wait 2 minutes, then hard-refresh (Ctrl+Shift+R, or Cmd+Shift+R on Mac). Confirm the Actions run is green. |
 | **Post shows but has no category link** | The `category:` text does not match any file in `_topics/` exactly. Compare spelling and the `&`. |
+| **"Video player configuration error" / Error 153** | YouTube refuses to play embedded videos on pages opened straight from your computer (the address starts with `file://`). It works once the page is on a real web address, including `http://localhost:4000` when previewing with Jekyll. Videos opened from the local test copy show a thumbnail that opens YouTube instead. If you see the error on the live site, check that the video allows embedding (YouTube Studio > video > **Show more** > **Allow embedding**) and that you pasted only the 11-character ID. |
 | **Video area is blank or says unavailable** | Check the `youtube_id` (11 characters, no `v=` or extra text). Confirm the video is Public or Unlisted and that embedding is allowed (YouTube Studio > video > **Show more** > **Allow embedding**). |
 | **Image is missing** | The path is case sensitive and must start with `/`, such as `/assets/images/posts/photo.jpg`. Confirm the file was uploaded to that folder. |
 | **Banner, favicon, or manifest missing** | Make sure `banner.png`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, and `site.webmanifest` are in the repository root (see setup step 1). |
@@ -258,6 +259,33 @@ You can change nearly everything from a few places, without touching templates:
 - **About page:** `about.md`. It is plain Markdown. Edit the words between the headings. Keep the `<div class="card" markdown="1">` and `</div>` lines around each section so the cards still display.
 - **Colors, fonts, and widths:** the `:root` block at the top of `assets/css/style.css` (gold, background, fonts, column widths). Changing a value there updates the entire site.
 - **Posts per page:** `paginate: 7` in `_config.yml`.
+
+### Google Analytics
+
+- Open `_config.yml` and find `google_analytics:`. Replace the value with your own **Measurement ID** (it looks like `G-XXXXXXXXXX`). You'll find it in Google Analytics under **Admin > Data streams > your stream**. The ID currently there is the one from your original site.
+- To turn tracking off, delete that line or set it to `G-XXXXXXXXXX`; the site ignores placeholder values.
+- It only runs on the live site, never when you preview on your own computer, so your own testing doesn't count as visits.
+- For Google Search Console, paste the code from its "HTML tag" method into `google_site_verification:` in the same file.
+
+### Social sharing cards
+
+When someone shares a page or post on Facebook, X, LinkedIn, WhatsApp, iMessage, Slack, or Discord, the link shows a card with a title, a short description, and an image. The site builds these automatically for every page:
+
+| Part of the card | Where it comes from |
+|---|---|
+| **Title** | The post's `title:` |
+| **Description** | The post's `excerpt:` (about 200 characters; write a good one, since this is the sales pitch) |
+| **Image** | The post's `image:` if it has one. Otherwise the default gold cross card (`assets/images/social-default.png`) |
+| **Image description** | The post's `image_alt:` (or the post title if you leave it out) |
+
+Tips for good cards:
+
+- **Image size:** 1200 x 630 pixels (about 2:1) is ideal. Use **PNG or JPG**. Social sites do **not** show SVG or WebP images. Keep it under about 1 MB.
+- **Per-post image:** upload to `assets/images/posts/` and set `image: /assets/images/posts/your-card.jpg` and `image_alt: "..."` in the post. The image also appears at the top of written posts and on the homepage card.
+- **Video posts** use the default gold cross card unless you give them an `image:`. To use the video's own YouTube thumbnail, add `image: https://i.ytimg.com/vi/VIDEO_ID/maxresdefault.jpg` (replace `VIDEO_ID`). Not every video has that size; if the card shows broken, use your own image instead.
+- **Changing the default card:** replace `assets/images/social-default.png` with your own 1200 x 630 PNG using the same file name. The description text and size are in `_config.yml` under `social_image`.
+- **Facebook, X, and LinkedIn remember old cards.** After changing a post's image or text, refresh the preview here: [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/), [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/). Paste the post's full address and click to re-scrape.
+- Cards only work with real addresses. They will not show when you share a link from your computer's local preview.
 
 ---
 
@@ -293,12 +321,12 @@ If you would rather keep a sample as a reference, set `sample: false` in its fro
 | **Related posts** | Under every post |
 | **RSS feed** | `/feed.xml` |
 | **Sitemap** | `/sitemap.xml` (plus `robots.txt`) |
-| **SEO and social sharing metadata** (Open Graph, X card, canonical links) | Built into every page |
+| **SEO and social sharing cards** (title, description, image, Open Graph, X card, canonical links, structured data) | Built into every page; see [Social sharing cards](#social-sharing-cards) |
 | **Share links** (Facebook, X, email) | Under every post |
 | **Accessibility** | Skip link, visible keyboard focus, readable type sizes, reduced-motion support, labeled navigation |
 | **Mobile friendly** | Menu collapses into a button on phones, full-width buttons, large tap targets, notch-safe margins, and videos that stay 16:9 |
 
-Plugins used (all supported by GitHub Pages): `jekyll-feed`, `jekyll-paginate`, `jekyll-seo-tag`, `jekyll-sitemap`. There is no database, external CMS, or build tool to maintain.
+Plugins used (all supported by GitHub Pages): `jekyll-feed`, `jekyll-paginate`, `jekyll-sitemap`. Social sharing and search-engine metadata are built into `_includes/seo.html`. There is no database, external CMS, or build tool to maintain.
 
 ---
 
@@ -308,7 +336,7 @@ Plugins used (all supported by GitHub Pages): `jekyll-feed`, `jekyll-paginate`, 
 .
 ├── _config.yml               Site-wide settings
 ├── _data/navigation.yml      Menu links
-├── _includes/                Reusable pieces (header, footer, post card, video embed, related posts...)
+├── _includes/                Reusable pieces (header, footer, post card, video embed, related posts, social/SEO tags...)
 ├── _layouts/                 Page designs (default, post, page, category)
 ├── _posts/                   YOUR POSTS GO HERE (written and video)
 ├── _templates/               Copy-and-paste starting points

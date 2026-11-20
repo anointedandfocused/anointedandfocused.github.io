@@ -1,0 +1,133 @@
+{%- comment -%}
+  Page title, description, canonical address, Open Graph (Facebook, LinkedIn, iMessage, WhatsApp, Slack),
+  X/Twitter card, and structured data for search engines.
+  Nothing here needs editing: it reads each post's front matter and the settings in _config.yml.
+{%- endcomment -%}
+
+{%- assign is_post = false -%}
+{%- if page.collection == 'posts' -%}{%- assign is_post = true -%}{%- endif -%}
+
+{%- comment -%} ---- Title ---- {%- endcomment -%}
+{%- if page.url == '/' -%}
+  {%- capture seo_title -%}{{ site.title }} | {{ site.tagline }}{%- endcapture -%}
+  {%- assign share_title = site.title -%}
+{%- elsif page.title -%}
+  {%- capture seo_title -%}{{ page.title }} | {{ site.title }}{%- endcapture -%}
+  {%- assign share_title = page.title -%}
+{%- else -%}
+  {%- assign seo_title = site.title -%}
+  {%- assign share_title = site.title -%}
+{%- endif -%}
+
+{%- comment -%} ---- Description ---- {%- endcomment -%}
+{%- assign seo_desc = page.description -%}
+{%- if seo_desc == nil or seo_desc == '' -%}
+  {%- if is_post -%}{%- assign seo_desc = page.excerpt | strip_html | strip_newlines | strip -%}{%- endif -%}
+{%- endif -%}
+{%- if seo_desc == nil or seo_desc == '' -%}{%- assign seo_desc = site.description -%}{%- endif -%}
+{%- assign seo_desc = seo_desc | strip_html | strip_newlines | strip | truncate: 200 -%}
+
+{%- comment -%} ---- Address ---- {%- endcomment -%}
+{%- assign canonical = page.url | replace: 'index.html', '' | absolute_url -%}
+
+{%- comment -%} ---- Image: the post's own image, otherwise the default gold cross card ---- {%- endcomment -%}
+{%- assign img_src = page.image -%}
+{%- if img_src.path -%}{%- assign img_src = img_src.path -%}{%- endif -%}
+{%- assign img_is_custom = true -%}
+{%- if img_src == nil or img_src == '' -%}
+  {%- assign img_src = site.social_image -%}
+  {%- assign img_is_custom = false -%}
+{%- endif -%}
+{%- if img_src contains '://' -%}
+  {%- assign img_url = img_src -%}
+{%- else -%}
+  {%- assign img_url = img_src | absolute_url -%}
+{%- endif -%}
+{%- if img_is_custom -%}
+  {%- assign img_alt = page.image_alt | default: share_title -%}
+{%- else -%}
+  {%- assign img_alt = site.social_image_alt | default: site.title -%}
+{%- endif -%}
+
+<title>{{ seo_title | escape }}</title>
+<meta name="description" content="{{ seo_desc | escape }}">
+<meta name="author" content="{{ site.author | escape }}">
+<link rel="canonical" href="{{ canonical }}">
+{%- if site.google_site_verification and site.google_site_verification != '' %}
+<meta name="google-site-verification" content="{{ site.google_site_verification }}">
+{%- endif %}
+
+<!-- Open Graph: Facebook, LinkedIn, iMessage, WhatsApp, Slack, Discord -->
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:locale" content="{{ site.locale | default: 'en_US' }}">
+<meta property="og:type" content="{% if is_post %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{{ share_title | escape }}">
+<meta property="og:description" content="{{ seo_desc | escape }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ img_url }}">
+{%- if img_url contains 'https://' %}
+<meta property="og:image:secure_url" content="{{ img_url }}">
+{%- endif %}
+{%- if img_url contains '.png' %}
+<meta property="og:image:type" content="image/png">
+{%- elsif img_url contains '.jpg' or img_url contains '.jpeg' %}
+<meta property="og:image:type" content="image/jpeg">
+{%- endif %}
+{%- unless img_is_custom %}
+<meta property="og:image:width" content="{{ site.social_image_width | default: 1200 }}">
+<meta property="og:image:height" content="{{ site.social_image_height | default: 630 }}">
+{%- endunless %}
+<meta property="og:image:alt" content="{{ img_alt | escape }}">
+{%- if is_post %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<meta property="article:modified_time" content="{{ page.last_modified_at | default: page.date | date_to_xmlschema }}">
+{%- assign post_cat = page.categories | first -%}
+{%- if post_cat %}
+<meta property="article:section" content="{{ post_cat | escape }}">
+{%- endif %}
+{%- for tag in page.tags %}
+<meta property="article:tag" content="{{ tag | escape }}">
+{%- endfor %}
+{%- endif %}
+{%- if site.facebook.app_id %}
+<meta property="fb:app_id" content="{{ site.facebook.app_id }}">
+{%- endif %}
+
+<!-- X (Twitter) -->
+<meta name="twitter:card" content="summary_large_image">
+{%- if site.twitter.username %}
+<meta name="twitter:site" content="@{{ site.twitter.username }}">
+<meta name="twitter:creator" content="@{{ site.twitter.username }}">
+{%- endif %}
+<meta name="twitter:title" content="{{ share_title | escape }}">
+<meta name="twitter:description" content="{{ seo_desc | escape }}">
+<meta name="twitter:image" content="{{ img_url }}">
+<meta name="twitter:image:alt" content="{{ img_alt | escape }}">
+
+<!-- Structured data for search engines -->
+<script type="application/ld+json">
+{%- if is_post %}
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ seo_desc | jsonify }},
+  "image": {{ img_url | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+  "articleSection": {{ post_cat | jsonify }},
+  "keywords": {{ page.tags | join: ', ' | jsonify }},
+  "mainEntityOfPage": { "@type": "WebPage", "@id": {{ canonical | jsonify }} },
+  "author": { "@type": "Organization", "name": {{ site.author | jsonify }}, "url": {{ site.url | jsonify }} },
+  "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "url": {{ site.url | jsonify }} }
+}
+{%- else %}
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "description": {{ site.description | jsonify }},
+  "url": {{ site.url | jsonify }}
+}
+{%- endif %}
+</script>

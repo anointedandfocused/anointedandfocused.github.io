@@ -15,12 +15,32 @@ timezone: America/Detroit
 url: "https://anointedandfocused.com"
 baseurl: ""
 
-# Google Analytics (same ID as the current site). Remove the line to turn it off.
+# ---- Google Analytics 4 ----
+# Put your own Measurement ID here (it looks like G-XXXXXXXXXX). Find it in Google Analytics:
+# Admin > Data streams > (your stream). The ID below is the one from your original site.
+# To turn tracking off, delete the line or set it to G-XXXXXXXXXX.
+# It only runs on the live site, never when you preview on your own computer.
 google_analytics: G-E2CKZTNS5B
 
-# X (Twitter) handle used in social sharing metadata.
+# ---- Optional site verification (leave blank to skip) ----
+# Google Search Console: paste only the code from the "HTML tag" method (the content="..." part).
+google_site_verification: ""
+
+# ---- Social sharing cards (Facebook, X, LinkedIn, iMessage, WhatsApp, Slack...) ----
+# Every page and post is shared with its own title, description, and image.
+# A post's own `image:` is used when it has one. Otherwise this default card is used.
+social_image: /assets/images/social-default.png
+social_image_alt: "Anointed & Focused: a gold cross on a black background"
+social_image_width: 1200
+social_image_height: 630
+
+# X (Twitter) handle shown on cards (no @).
 twitter:
   username: anointedfocused
+
+# Optional: your Facebook App ID, if you have one. Leave out otherwise.
+# facebook:
+#   app_id: "1234567890"
 
 # Social icons in the footer. Supported icons: x, facebook, instagram, youtube, tiktok
 social_links:
@@ -65,7 +85,6 @@ permalink: /posts/:title/
 plugins:
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-seo-tag
   - jekyll-sitemap
 
 paginate: 7
